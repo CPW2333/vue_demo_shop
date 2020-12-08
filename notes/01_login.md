@@ -95,7 +95,7 @@
             // console.log(this.$refs);
             this.$refs.loginFormRef.resetFields();
         }
-  },
+    },
     
 登录前预校验：
 
