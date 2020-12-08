@@ -264,7 +264,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 #### 提交登录部分的代码
     git status
     git add .
-    git commit -m tw提交了登录功能代码
+    git commit -m "tw完成了登录功能"
 ### 主页布局 
 ### 用户管理模块 
 ### 权限管理模块 
