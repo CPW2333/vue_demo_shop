@@ -1,0 +1,25 @@
+@font-face {font-family: "iconfont";
+    src: url('//at.alicdn.com/t/font_2254253_ittbx0ur4k.eot?t=1607392342606'); /* IE9 */
+    src: url('//at.alicdn.com/t/font_2254253_ittbx0ur4k.eot?t=1607392342606#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAANIAAsAAAAABvwAAAL8AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDBgqBYIFqATYCJAMMCwgABCAFhG0HORszBhHVk9lkf01uysAtkN9XVUiwTZ2FxHuaoqP7sCmChOl+EHq/4kdj6Pfa1UAuDFfRZYInWnt9s7P/siFWiUKUQOiYLFJRVRHYqmpAVUcgAVWrj4f3d/y5711Ct2mREE0xM0ESdFOjWJXffgDAv+02XF0saUITG+YQ/ldCpdzdOTjk5oekCAKwQKAsWmRPBhraLLrMb4GHynebm/1SNSp3+Ck5D/6n7khgh6T91QgmQ3W6weqzXz4CBPvEvdMm0Mb5LMtljE1jDf0XBZhQF9De2CYrkAS9YewCl3AeAkIkyyFDfWsvjmVNEyDnzNQILhdmWZZzhFezNlUu0nDlxBzgQvh9+VEUDoxAxZrbedSNU/nFJbrtz+KTUM7nA9gmUJADLGStTQ9SwhgqxGDbSz2WMHPFfD9U6DrP/sMDQyAtVnUYgAyUMfga7Iph8K1EddeXKAAPWFAJppElbuwDTRcaFrWW3DdP6V7xP+zNjdfjePE2053HOzwqziV5b3vH+OoQBNuCJrvB3F+/zYb1qVdGZuPu3cfTGiqFfSPDI854M5bCC+Zpc3qNL19cMj3OnTr9pWdpib97a9w6W9IO3jpzk3LP1NS5Z03/jO7rjuu5JjQhSiwyv/TVywbAX2kF+OrX/vZv+H55pCFL/4MF4OO/DYO+tH6V4Bj0Vv7bbukALFdbTk3VQGu1AJUyMmlAiB0DP8sf48t4S/z9Z4UTn8IIkgTlpJAtPQcBoUrgcSoQIlvD5lCxVinJYCDLAYCIcg9GhAdQUV6SLf0zAhL8gScqFCH6I3bPUKYxmhRtwgDuD6PnjRx3MlHtFfv3YjWrDnlP1DjGoMrLYq7DDXWOBfHT1ykRkPIKLbgMl4VhV57Qp3xIaW+KgurelHteD0aKNmEA7g9Gzxv5nZMpff6K/Xux2kKoST5R49g7qOTKHuTOsPUi3Ms18dPXUiJAyitogQ8XO81grx81oU+5YURybxSoHfU15Oub1g8oZy1YR2uUqJG4bIxf1nA5oh4O') format('woff2'),
+    url('//at.alicdn.com/t/font_2254253_ittbx0ur4k.woff?t=1607392342606') format('woff'),
+    url('//at.alicdn.com/t/font_2254253_ittbx0ur4k.ttf?t=1607392342606') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+    url('//at.alicdn.com/t/font_2254253_ittbx0ur4k.svg?t=1607392342606#iconfont') format('svg'); /* iOS 4.1- */
+  }
+  
+  .iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .icon-password:before {
+    content: "\e734";
+  }
+  
+  .icon-user:before {
+    content: "\e609";
+  }
+  
