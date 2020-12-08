@@ -45,4 +45,6 @@
 ### 各模块合并的git操作
 
     git merge login
-    
+    git status
+    git add .
+    git commit -m tw提交合并的login模块
