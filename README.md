@@ -265,6 +265,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
     git status
     git add .
     git commit -m "tw完成了登录功能"
+    git branch
+    git checkout main 
 ### 主页布局 
 ### 用户管理模块 
 ### 权限管理模块 
