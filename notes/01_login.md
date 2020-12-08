@@ -347,4 +347,40 @@ router.js:
         { path: '/users', component: Users },
         ]
     }
+创建面包屑导航区域：
+创建卡片视图区域：
+```
+
+##### 获取用户列表数据
+```js
+User.js:
+    行为区：
+        发送请求
+        保存到data
+
+```
+
+##### 渲染用户列表数据
+```js
+用户列表区域:
+    <el-table :data="userList" border stripe>
+        <el-table-column type="index"></el-table-column>
+        <el-table-column label="姓名" prop="username"></el-table-column>
+    </el-table>
+状态列修改：
+    <el-table-column label="状态" >
+        <template slot-scope="scope">
+            <el-switch
+                v-model="scope.row.mg_state"
+                active-color="#13ce66"
+            >
+            </el-switch>
+        </template>
+    </el-table-column>
+自定义操作列渲染：
+添加分页视图：
+实现用户状态改变：
+实现搜索功能
+实现添加用户功能
+
 ```
