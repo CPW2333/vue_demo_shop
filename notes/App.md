@@ -48,3 +48,4 @@
     git status
     git add .
     git commit -m tw提交合并的login模块
+    git push
