@@ -1,11 +1,12 @@
 import Vue from 'vue'
 // 按需导入的标签
-import { Button, Form, FormItem, Input, Message, Container, Header, Aside, Main, Menu, Submenu, MenuItem, Breadcrumb, BreadcrumbItem, Card, Row, Col, Table, TableColumn, Switch, Tooltip, Pagination, Dialog } from 'element-ui'
+import { Button, Form, FormItem, Input, Message, Container, Header, Aside, Main, Menu, Submenu, MenuItem, Breadcrumb, BreadcrumbItem, Card, Row, Col, Table, TableColumn, Switch, Tooltip, Pagination, Dialog, MessageBox } from 'element-ui'
 
 Vue.use(Button)
 // 组件注册为全局可用
 // $自定义名字 = 正确组件名
 Vue.prototype.$message = Message
+Vue.prototype.$confirm = MessageBox.confirm
 // 登陆页面的
 Vue.use(Form)
 Vue.use(FormItem)

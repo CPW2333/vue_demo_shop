@@ -53,9 +53,9 @@ export default {
         username: [
           { required: true, message: '请输入用户名！', trigger: 'blur' },
           {
-            min: 3,
+            min: 2,
             max: 10,
-            message: '长度在 3 到 10 个字符',
+            message: '长度在 2 到 10 个字符',
             trigger: 'blur'
           }
         ],
@@ -83,9 +83,9 @@ export default {
       this.$refs.loginFormRef.validate(async (valid) => {
         if (!valid) return
         const { data: res } = await this.$http.post('login', this.loginForm)
-        if (res.meta.status !== 200) return this.$message.error('登录失败！')
-        this.$message.success('登录成功！')
         // console.log(res);
+        if (res.meta.status !== 200) return this.$message.error(res.meta.msg)
+        this.$message.success(res.meta.msg)
         // 记录token 方便后续访问
         window.sessionStorage.setItem('token', res.data.token)
         // 页面跳转
