@@ -5,6 +5,7 @@ body,
     height: 100%;
     margin: 0;
     padding: 0;
+    /* min-width: 1366px; */
 }
 
 /* 覆盖默认样式尽量都写到此文件中 卡片视图样式 */
