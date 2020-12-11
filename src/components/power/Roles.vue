@@ -118,12 +118,12 @@
           :model="addRoleForm"
           :rules="addRoleFormRules"
           ref="addRoleFormRef"
-          label-width="80px"
+          label-width="95px"
         >
-          <el-form-item label="角色名称" prop="roleName">
+          <el-form-item label="角色名称：" prop="roleName">
             <el-input v-model="addRoleForm.roleName"></el-input>
           </el-form-item>
-          <el-form-item label="角色描述">
+          <el-form-item label="角色描述：">
             <el-input v-model="addRoleForm.roleDesc"></el-input>
           </el-form-item>
         </el-form>
@@ -146,12 +146,12 @@
           :model="editRoleInfoForm"
           :rules="editRoleInfoFormRules"
           ref="editRoleInfoFormRef"
-          label-width="80px"
+          label-width="95px"
         >
-          <el-form-item label="角色名称" prop="roleName">
+          <el-form-item label="角色名称：" prop="roleName">
             <el-input v-model="editRoleInfoForm.roleName"></el-input>
           </el-form-item>
-          <el-form-item label="角色描述">
+          <el-form-item label="角色描述：">
             <el-input v-model="editRoleInfoForm.roleDesc"></el-input>
           </el-form-item>
         </el-form>
@@ -218,10 +218,7 @@ export default {
       // 编辑角色对话框是否显示
       editRoleInfoDialogVisible: false,
       // 编辑角色信息所需的对象信息
-      editRoleInfoForm: {
-        roleName: '',
-        roleDesc: ''
-      },
+      editRoleInfoForm: {},
       // 编辑角色信息需要的表单验证规则对象
       editRoleInfoFormRules: {
         roleName: [
@@ -258,7 +255,9 @@ export default {
     async getRolesList () {
       // 请求参数设置为list
       const { data: res } = await this.$http.get('roles')
-      if (res.meta.status !== 200) { return this.$message.error('权限列表数据获取失败') }
+      if (res.meta.status !== 200) {
+        return this.$message.error('权限列表数据获取失败')
+      }
       this.rolesList = res.data
     },
     // 添加角色对话框关闭
@@ -286,9 +285,12 @@ export default {
     async showEditRoleInfoDialog (id) {
       const { data: res } = await this.$http.get(`roles/${id}`)
       // console.log(res);
-      if (res.meta.status !== 200) { return this.$message.error('查询角色信息失败') }
+      if (res.meta.status !== 200) {
+        return this.$message.error('查询角色信息失败')
+      }
       // 保存查询到的角色信息
       this.editRoleInfoForm = res.data
+      // console.log(this.editRoleInfoForm);
       // 显示修改角色对话框
       this.editRoleInfoDialogVisible = true
     },
@@ -373,7 +375,9 @@ export default {
       // 获取所有权限数据
       const { data: res } = await this.$http.get('rights/tree')
       // console.log(res);
-      if (res.meta.status !== 200) { return this.$message.error('查询权限信息失败') }
+      if (res.meta.status !== 200) {
+        return this.$message.error('查询权限信息失败')
+      }
       // 保存查询到的所有权限信息
       this.rightsList = res.data
       //   递归获取三级节点的id
