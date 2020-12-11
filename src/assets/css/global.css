@@ -23,6 +23,10 @@ body,
     font-size: 12px;
 }
 
-.el-pagination{
+.el-pagination {
     margin-top: 15px;
+}
+
+.el-cascader-panel {
+    height: 250px !important;
 }

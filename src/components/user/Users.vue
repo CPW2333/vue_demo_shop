@@ -110,18 +110,18 @@
           :model="addUserForm"
           :rules="addUserFormRules"
           ref="addUserFormRef"
-          label-width="70px"
+          label-width="80px"
         >
-          <el-form-item label="用户名" prop="username">
+          <el-form-item label="用户名：" prop="username">
             <el-input v-model="addUserForm.username"></el-input>
           </el-form-item>
-          <el-form-item label="密码" prop="password">
+          <el-form-item label="密码：" prop="password">
             <el-input v-model="addUserForm.password"></el-input>
           </el-form-item>
-          <el-form-item label="邮箱" prop="email">
+          <el-form-item label="邮箱：" prop="email">
             <el-input v-model="addUserForm.email"></el-input>
           </el-form-item>
-          <el-form-item label="手机" prop="mobile">
+          <el-form-item label="手机：" prop="mobile">
             <el-input v-model="addUserForm.mobile"></el-input>
           </el-form-item>
         </el-form>
@@ -144,15 +144,15 @@
           :model="editUserInfoForm"
           :rules="editUserInfoFormRules"
           ref="editUserInfoFormRef"
-          label-width="70px"
+          label-width="80px"
         >
-          <el-form-item label="用户名">
+          <el-form-item label="用户名：">
             <el-input disabled v-model="editUserInfoForm.username"></el-input>
           </el-form-item>
-          <el-form-item label="邮箱" prop="email">
+          <el-form-item label="邮箱：" prop="email">
             <el-input v-model="editUserInfoForm.email"></el-input>
           </el-form-item>
-          <el-form-item label="手机号" prop="mobile">
+          <el-form-item label="手机号：" prop="mobile">
             <el-input v-model="editUserInfoForm.mobile"></el-input>
           </el-form-item>
         </el-form>
