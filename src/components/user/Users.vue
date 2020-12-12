@@ -17,6 +17,7 @@
             v-model="queryInfo.query"
             clearable
             @clear="getUserList"
+            @keyup.enter.native="handleInputConfirm()"
           >
             <el-button
               slot="append"
@@ -337,6 +338,11 @@ export default {
       }
       this.$message.success(res.meta.msg)
     },
+    // 监听在输入框按了回车键
+    handleInputConfirm () {
+      // console.log('按了回车键')
+      this.getUserList()
+    },
 
     // 监听添加用户对话框关闭
     addUserDialogClose () {
@@ -424,7 +430,9 @@ export default {
       this.userInfo = userInfo
       // 获取所有角色列表
       const { data: res } = await this.$http.get('roles')
-      if (res.meta.status !== 200) { return this.$message.error(res.meta.msg) }
+      if (res.meta.status !== 200) {
+        return this.$message.error(res.meta.msg)
+      }
       // 保存角色列表
       this.rolesList = res.data
       // console.log(this.rolesList)

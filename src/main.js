@@ -29,6 +29,20 @@ Vue.config.productionTip = false
 // 自定义组件的声明
 Vue.component('tree-table', TreeTable)
 
+// 自定义全局时间过滤器
+Vue.filter('dataFormat', function (originVal) {
+  const date = new Date(originVal)
+  const y = date.getFullYear()
+  const m = (date.getMonth() + 1 + '').padStart(2, '0')
+  const d = (date.getDay() + '').padStart(2, '0')
+
+  const hh = (date.getHours() + '').padStart(2, '0')
+  const mm = (date.getMinutes() + '').padStart(2, '0')
+  const ss = (date.getSeconds() + '').padStart(2, '0')
+
+  return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
+})
+
 new Vue({
   router,
   render: h => h(App)

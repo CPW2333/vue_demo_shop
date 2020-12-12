@@ -437,5 +437,28 @@ User.js:
 
 ##### 商品列表页面
 ```js
+创建全局时间过滤器
+    main.js:
+        Vue.filter('dataFormat', function (originVal) {
+            const date = new Date(originVal)
+            const y = date.getFullYear()
+            const m = (date.getMonth() + 1 + '').padStart(2, '0')
+            const d = (date.getDay() + '').padStart(2, '0')
 
+            const hh = (date.getHours() + '').padStart(2, '0')
+            const mm = (date.getMinutes() + '').padStart(2, '0')
+            const ss = (date.getSeconds() + '').padStart(2, '0')
+
+            return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
+
+        })
+跳转到添加商品页面：
+    // 添加路由导航页面
+    this.$router.push('/goods/add')
+    goods文件夹添加组件：
+        AddGoods.vue
+    第一个children添加子路由规则：
+        { path: '/goods/add', component: AddGoods },
+    简单数字转换：
+        activeIndex - 0
 ```

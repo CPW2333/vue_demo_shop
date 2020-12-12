@@ -14,19 +14,31 @@ body,
     font-size: 12px;
 }
 
+/* 卡片的 */
 .el-card {
     box-shadow: 0 1px 1px rgba(0, 0, 0, .15) !important;
 }
 
+/* 表格的 */
 .el-table {
     margin-top: 15px;
     font-size: 12px;
 }
 
+/* 分页的 */
 .el-pagination {
     margin-top: 15px;
 }
 
+/* 级联框的 */
 .el-cascader-panel {
     height: 250px !important;
+}
+
+/* 步骤条的 */
+.el-steps{
+ margin: 15px;
+}
+.el-step__title{
+    font-size: 12px;
 }
