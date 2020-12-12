@@ -75,7 +75,7 @@ export default {
       // 请求参数设置为Tree
       const { data: res } = await this.$http.get('rights/tree')
       if (res.meta.status !== 200) {
-        return this.$message.error('权限列表数据获取失败')
+        return this.$message.error(res.meta.msg)
       }
       this.rightsTree = res.data
       this.modifyRightsTree()

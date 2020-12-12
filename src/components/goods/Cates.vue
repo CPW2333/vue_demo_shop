@@ -40,13 +40,13 @@
         <!-- 排序 模板 -->
         <template slot="order" slot-scope="scope">
           <el-tag v-if="scope.row.cat_level === 0" type="" size="mini"
-            >一级</el-tag
+            >一级分类</el-tag
           >
           <el-tag v-if="scope.row.cat_level === 1" type="success" size="mini"
-            >二级</el-tag
+            >二级分类</el-tag
           >
           <el-tag v-if="scope.row.cat_level === 2" type="warning" size="mini"
-            >三级</el-tag
+            >三级分类</el-tag
           >
         </template>
         <!-- 操作 模板 -->
@@ -98,7 +98,8 @@
             <el-input v-model="addCateForm.cat_name"></el-input>
           </el-form-item>
           <el-form-item label="父级分类：">
-            <!-- options:用来指定数据源
+            <!-- 级联选择框
+            options:用来指定数据源
             props:用来指定数据对象-->
             <el-cascader
               clearable
@@ -253,7 +254,9 @@ export default {
       const { data: res } = await this.$http.get('categories', {
         params: this.queryInfo
       })
-      if (res.meta.status !== 200) { return this.$message.error('商品列表获取失败') }
+      if (res.meta.status !== 200) {
+        return this.$message.error(res.meta.msg)
+      }
       this.catesList = res.data.result
       this.total = res.data.total
       // console.log(res);
@@ -279,7 +282,9 @@ export default {
       const { data: res } = await this.$http.get('categories', {
         params: { type: 2 }
       })
-      if (res.meta.status !== 200) { return this.$message.error('分类父级列表获取失败') }
+      if (res.meta.status !== 200) {
+        return this.$message.error(res.meta.msg)
+      }
       this.parentCatesList = res.data
       // console.log(res)
     },
@@ -313,7 +318,7 @@ export default {
     submitaddCate () {
       // 预校验
       this.$refs.addCateFormRef.validate(async (valid) => {
-        if (!valid) return this.$message.error('添加分类失败')
+        if (!valid) return this.$message.error('规则校验失败')
         // 发送请求
         const { data: res } = await this.$http.post(
           'categories',
@@ -331,7 +336,9 @@ export default {
     async showEditCateInfoDialog (id) {
       // console.log(id)
       const { data: res } = await this.$http.get('categories/' + id)
-      if (res.meta.status !== 200) { return this.$message.error('分类信息获取失败') }
+      if (res.meta.status !== 200) {
+        return this.$message.error(res.meta.msg)
+      }
       this.editCateInfoForm = res.data
       // console.log(this.editCateInfoForm);
       this.editCateInfoDialogVisible = true
@@ -343,7 +350,7 @@ export default {
     // 监听提交编辑分类按钮
     submitEditCateInfo () {
       this.$refs.editCateInfoFormRef.validate(async (valid) => {
-        if (!valid) return this.$message.error('修改用户信息失败')
+        if (!valid) return this.$message.error('规则校验失败')
         // 发起网络请求
         const { data: res } = await this.$http.put(
           `categories/${this.editCateInfoForm.cat_id}`,
@@ -379,7 +386,7 @@ export default {
       }
       // 发起删除请求
       const { data: res } = await this.$http.delete('categories/' + id)
-      if (res.meta.status !== 200) return this.$message.error('删除分类失败')
+      if (res.meta.status !== 200) return this.$message.error(res.meta.msg)
       this.$message.success(res.meta.msg)
       this.getCatesList()
     }

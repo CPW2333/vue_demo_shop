@@ -305,7 +305,7 @@ export default {
         params: this.queryInfo
       })
       if (res.meta.status !== 200) {
-        return this.$message.error('获取用户列表失败！')
+        return this.$message.error(res.meta.msg)
       }
       this.userList = res.data.users
       this.total = res.data.total
@@ -333,9 +333,9 @@ export default {
       if (res.meta.status !== 200) {
         // 先取反
         userInfo.mg_state = !userInfo.mg_state
-        return this.$message.error('更新用户状态失败！')
+        return this.$message.error(res.meta.msg)
       }
-      this.$message.success('更新用户状态成功！')
+      this.$message.success(res.meta.msg)
     },
 
     // 监听添加用户对话框关闭
@@ -346,7 +346,7 @@ export default {
     // 添加用户前的表单预校验与提交
     submitAddUser () {
       this.$refs.addUserFormRef.validate(async (valid) => {
-        if (!valid) return this.$message.error('添加用户失败')
+        if (!valid) return this.$message.error('规则校验失败')
         // 发起网络请求
         const { data: res } = await this.$http.post('users', this.addUserForm)
         // console.log(res)
@@ -365,7 +365,7 @@ export default {
       // console.log(id);
       const { data: res } = await this.$http.get(`users/${id}`)
       if (res.meta.status !== 200) {
-        return this.$message.error('查询用户信息失败')
+        return this.$message.error(res.meta.msg)
       }
       // 保存查询到的用户信息
       this.editUserInfoForm = res.data
@@ -378,7 +378,7 @@ export default {
     // 编辑用户预校验与提交
     submitEditUserInfo () {
       this.$refs.editUserInfoFormRef.validate(async (valid) => {
-        if (!valid) return this.$message.error('修改用户信息失败')
+        if (!valid) return this.$message.error('规则校验失败')
         // 发起网络请求
         const { data: res } = await this.$http.put(
           `users/${this.editUserInfoForm.id}`,
@@ -424,7 +424,7 @@ export default {
       this.userInfo = userInfo
       // 获取所有角色列表
       const { data: res } = await this.$http.get('roles')
-      if (res.meta.status !== 200) { return this.$message.error('角色列表获取失败') }
+      if (res.meta.status !== 200) { return this.$message.error(res.meta.msg) }
       // 保存角色列表
       this.rolesList = res.data
       // console.log(this.rolesList)
@@ -439,9 +439,9 @@ export default {
           rid: this.selectedRoleId
         }
       )
-      if (res.meta.status !== 200) return this.$message.error('分配角色失败')
+      if (res.meta.status !== 200) return this.$message.error(res.meta.msg)
 
-      this.$message.success('更新角色成功')
+      this.$message.success(res.meta.msg)
       this.getUserList()
       this.setRoleDialogVisible = false
     },

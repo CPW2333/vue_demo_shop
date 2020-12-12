@@ -256,7 +256,7 @@ export default {
       // 请求参数设置为list
       const { data: res } = await this.$http.get('roles')
       if (res.meta.status !== 200) {
-        return this.$message.error('权限列表数据获取失败')
+        return this.$message.error(res.meta.msg)
       }
       this.rolesList = res.data
     },
@@ -268,7 +268,7 @@ export default {
     submitAddRole () {
       // 表单预校验与提交信息
       this.$refs.addRoleFormRef.validate(async (valid) => {
-        if (!valid) return this.$message.error('添加用户失败')
+        if (!valid) return this.$message.error('规则校验失败')
         // 发起网络请求
         const { data: res } = await this.$http.post('roles', this.addRoleForm)
         // console.log(res)
@@ -286,7 +286,7 @@ export default {
       const { data: res } = await this.$http.get(`roles/${id}`)
       // console.log(res);
       if (res.meta.status !== 200) {
-        return this.$message.error('查询角色信息失败')
+        return this.$message.error(res.meta.msg)
       }
       // 保存查询到的角色信息
       this.editRoleInfoForm = res.data
@@ -324,7 +324,7 @@ export default {
     // 提交编辑角色信息
     submitEditRoleInfo () {
       this.$refs.editRoleInfoFormRef.validate(async (valid) => {
-        if (!valid) return this.$message.error('修改用户信息失败')
+        if (!valid) return this.$message.error('规则校验失败')
         // 发起网络请求
         const { data: res } = await this.$http.put(
           `roles/${this.editRoleInfoForm.roleId}`,
@@ -376,7 +376,7 @@ export default {
       const { data: res } = await this.$http.get('rights/tree')
       // console.log(res);
       if (res.meta.status !== 200) {
-        return this.$message.error('查询权限信息失败')
+        return this.$message.error(res.meta.msg)
       }
       // 保存查询到的所有权限信息
       this.rightsList = res.data
