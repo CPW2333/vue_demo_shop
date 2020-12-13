@@ -30,7 +30,7 @@
         <el-step title="商品属性"></el-step>
         <el-step title="商品图片"></el-step>
         <el-step title="商品内容"></el-step>
-        <el-step title="完成" icon="iconfont icon-shangchuan"></el-step>
+        <el-step title="提交" icon="iconfont icon-shangchuan"></el-step>
       </el-steps>
       <!-- taba栏区域 -->
       <el-form
@@ -234,7 +234,9 @@ export default {
     // 级联选择框选中项变化
     keysSelected () {
       if (this.addGoodsForm.goods_cat.length !== 3) {
-        if (this.addGoodsForm.goods_cat.length === 2) { this.$message.warning('只允许选中第三级分类') }
+        if (this.addGoodsForm.goods_cat.length === 2) {
+          this.$message.warning('只允许选中第三级分类')
+        }
         this.addGoodsForm.goods_cat = []
       }
       // console.log(this.addGoodsForm.goods_cat)
@@ -276,9 +278,6 @@ export default {
           }
         )
         if (res.meta.status !== 200) return this.$message.error('获取数据失败')
-        /* res.data.forEach((v) => {
-          v.attr_vals = v.attr_vals ? v.attr_vals.split(' ') : []
-        }) */
         this.onlyTableData = res.data
         // console.log(this.onlyTableData)
       }
@@ -308,7 +307,7 @@ export default {
     submitAddGoods () {
       // console.log(this.addGoodsForm)
       this.$refs.addGoodsFormRef.validate(async (valid) => {
-        if (!valid) return this.$message.warning('请填写正确商品信息')
+        if (!valid) return this.$message.warning('请正确填写商品信息')
 
         // 发送请求 先改造数据
         // Lodash 做深拷贝 cloneDeep(obj)
@@ -330,17 +329,17 @@ export default {
           this.addGoodsForm.attrs.push(newInfo)
         })
         form.attrs = this.addGoodsForm.attrs
-        console.log(form)
+        // console.log(form)
         // 发请求 商品名字唯一
         const { data: res } = await this.$http.post('goods', form)
         if (res.meta.status !== 201) {
-          console.log(res)
+          // console.log(res)
           // 清空attrs数组
           this.addGoodsForm.attrs = []
           return this.$message.error(res.meta.msg)
         }
         this.$message.success(res.meta.msg)
-        console.log(res)
+        // console.log(res)
         this.$router.push('/goods')
       })
     }
@@ -363,8 +362,6 @@ export default {
 }
 .upImgTag {
   margin-bottom: 15px;
-}
-.previewImg {
 }
 .btnAddGoods {
   margin-top: 15px;
