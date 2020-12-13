@@ -11,6 +11,12 @@ import './assets/fonts/iconfont.css'
 import axios from 'axios'
 // 导入树形表格插件
 import TreeTable from 'vue-table-with-tree-grid'
+// 导入富文本编辑器
+import VueQuillEditor from 'vue-quill-editor'
+// 对应的样式
+import 'quill/dist/quill.core.css' // import styles
+import 'quill/dist/quill.snow.css' // for snow theme
+import 'quill/dist/quill.bubble.css' // for bubble theme
 
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
 // 通过axios请求拦截器添加token，保证拥有获取数据的权限
@@ -28,6 +34,8 @@ Vue.config.productionTip = false
 
 // 自定义组件的声明
 Vue.component('tree-table', TreeTable)
+// 富文本编辑器注册为全局可以使用
+Vue.use(VueQuillEditor /* { default global options } */)
 
 // 自定义全局时间过滤器
 Vue.filter('dataFormat', function (originVal) {

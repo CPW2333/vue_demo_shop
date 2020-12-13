@@ -261,7 +261,7 @@ export default {
       activeTabName: 'many',
       // 获取的动态参数的数据
       manyTableData: [],
-      // 获取的动态参数的数据
+      // 获取的静态属性的数据
       onlyTableData: [],
 
       // 默认添加参数对话框是否显示

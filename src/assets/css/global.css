@@ -36,9 +36,17 @@ body,
 }
 
 /* 步骤条的 */
-.el-steps{
- margin: 15px;
+.el-steps {
+    margin: 15px;
 }
-.el-step__title{
+
+.el-step__title {
     font-size: 12px;
+}
+
+/* 上传图片的 */
+
+/* 富文本编辑的 */
+.ql-editor {
+    min-height: 300px !important;
 }

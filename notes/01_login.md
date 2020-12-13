@@ -459,6 +459,12 @@ User.js:
         AddGoods.vue
     第一个children添加子路由规则：
         { path: '/goods/add', component: AddGoods },
-    简单数字转换：
+    简单字符串到数字转换：
         activeIndex - 0
+    Upload组件自己封装了一个请求Ajax，需要改掉：
+    商品内容需要富文本编辑器：
+        安装运行依赖 `vue-quill-editor @3.0.6`
+    安装运行依赖 lodash @4.17.111:
+        做深拷贝 `cloneDeep(obj)`
+        script中 第一行导入
 ```
