@@ -38,7 +38,7 @@ Vue.component('tree-table', TreeTable)
 Vue.use(VueQuillEditor /* { default global options } */)
 
 // 自定义全局时间过滤器
-Vue.filter('dataFormat', function (originVal) {
+Vue.filter('dateFormat', function (originVal) {
   const date = new Date(originVal)
   const y = date.getFullYear()
   const m = (date.getMonth() + 1 + '').padStart(2, '0')

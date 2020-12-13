@@ -467,4 +467,23 @@ User.js:
     安装运行依赖 lodash @4.17.111:
         做深拷贝 `cloneDeep(obj)`
         script中 第一行导入
+跳转到编辑商品页面：
+```
+
+### 订单管理模块开发
+
+##### 订单列表页面
+```js
+导入省市区数据：
+    script区域 导入数据
+    import cityData from './citydata.js'
+使用时间轴组件：
+    插件版本旧  不能直接使用 需要外部导入src
+    element.js:
+        import Timeline from '../plugins/timeline/index'
+        import TimelineItem from '../plugins/timeline-item/index'
+    Orders.vue:
+        <style lang="less" scoped>
+        @import '../../plugins/timeline/timeline.css';
+        @import '../../plugins/timeline-item/timeline-item.css';
 ```

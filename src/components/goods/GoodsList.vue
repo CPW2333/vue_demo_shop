@@ -49,7 +49,7 @@
         ></el-table-column>
         <el-table-column label="创建时间" prop="add_time">
           <template slot-scope="scope">
-            {{ scope.row.add_time | dataFormat }}
+            {{ scope.row.add_time | dateFormat }}
           </template>
         </el-table-column>
         <el-table-column label="操作">
