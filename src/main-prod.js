@@ -23,7 +23,7 @@ import NProgress from 'nprogress'
 // 导入进度条样式
 // import 'nprogress/nprogress.css'
 
-axios.defaults.baseURL = 'http://34.92.221.17:8888/api/private/v1/'
+axios.defaults.baseURL = 'https://www.wjforwk.xyz:8888/api/private/v1/'
 // 通过axios请求拦截器添加token，保证拥有获取数据的权限
 axios.interceptors.request.use(
   config => {
