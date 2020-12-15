@@ -13,16 +13,16 @@
       <el-row :gutter="20">
         <el-col :span="8">
           <el-input
-            placeholder="请输入用户名关键字查询"
+            placeholder="请输入用户名查询"
             v-model="queryInfo.query"
             clearable
-            @clear="getUserList"
+            @clear="getUsersList"
             @keyup.enter.native="handleInputConfirm()"
           >
             <el-button
               slot="append"
               icon="el-icon-search"
-              @click="getUserList"
+              @click="getUsersList"
             ></el-button>
           </el-input>
         </el-col>
@@ -34,13 +34,13 @@
       </el-row>
 
       <!-- 用户列表区域 -->
-      <el-table :data="userList" border stripe>
+      <el-table :data="usersList" border stripe>
         <el-table-column type="index"></el-table-column>
         <el-table-column label="姓名" prop="username"></el-table-column>
         <el-table-column label="邮箱" prop="email"></el-table-column>
-        <el-table-column label="电话" prop="mobile"></el-table-column>
+        <el-table-column label="手机号" prop="mobile"></el-table-column>
         <el-table-column label="角色" prop="role_name"></el-table-column>
-        <el-table-column label="状态">
+        <el-table-column label="可用状态">
           <template slot-scope="scope">
             <el-switch
               v-model="scope.row.mg_state"
@@ -50,7 +50,7 @@
             </el-switch>
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="180px">
+        <el-table-column label="操作" min-width="175px">
           <template slot-scope="scope">
             <!-- 修改按钮 -->
             <el-button
@@ -229,7 +229,7 @@ export default {
         pagesize: 5
       },
       // 用户列表数据
-      userList: [],
+      usersList: [],
       // 总数据条数
       total: 0,
       // 添加用户对话框是否显示
@@ -298,31 +298,50 @@ export default {
     }
   },
   created () {
-    this.getUserList()
+    this.getUsersList()
   },
   methods: {
-    async getUserList () {
+    async getUsersList () {
+      // 去除输入框空格
+      this.queryInfo.query = this.queryInfo.query.trim()
       const { data: res } = await this.$http.get('users', {
         params: this.queryInfo
       })
       if (res.meta.status !== 200) {
         return this.$message.error(res.meta.msg)
       }
-      this.userList = res.data.users
-      this.total = res.data.total
       // console.log(res)
+      // 查询结果优化
+      if (res.data.users.length === 0 && res.data.total !== 0) {
+        // console.log(this.queryInfo.query.length)
+        // 判断输入框是否有值
+        if (this.queryInfo.query.length !== 0) {
+          // 输入框有值 是条件查询 改页码再来一次请求
+          this.queryInfo.pagenum = 1
+          this.getUsersList()
+        } else {
+          // 输入框没有值 是删除操作
+          this.queryInfo.pagenum = res.data.pagenum - 1
+          // 页码不能为0
+          if (this.queryInfo.pagenum === 0) this.queryInfo.pagenum = 1
+          // 再请求一次
+          this.getUsersList()
+        }
+      }
+      this.usersList = res.data.users
+      this.total = res.data.total
     },
     // 监听pagesize改变的
     handleSizeChange (newSize) {
       //   console.log(newSize)
       this.queryInfo.pagesize = newSize
-      this.getUserList()
+      this.getUsersList()
     },
     // 监听页码值改变的
     handleCurrentChange (newPage) {
       //   console.log(newPage)
       this.queryInfo.pagenum = newPage
-      this.getUserList()
+      this.getUsersList()
     },
     // 监听switch开关状态的改变
     async userStateChanged (userInfo) {
@@ -341,7 +360,7 @@ export default {
     // 监听在输入框按了回车键
     handleInputConfirm () {
       // console.log('按了回车键')
-      this.getUserList()
+      this.getUsersList()
     },
 
     // 监听添加用户对话框关闭
@@ -352,7 +371,7 @@ export default {
     // 添加用户前的表单预校验与提交
     submitAddUser () {
       this.$refs.addUserFormRef.validate(async (valid) => {
-        if (!valid) return this.$message.error('规则校验失败')
+        if (!valid) return this.$message.warning('规则校验失败')
         // 发起网络请求
         const { data: res } = await this.$http.post('users', this.addUserForm)
         // console.log(res)
@@ -361,7 +380,7 @@ export default {
         }
         this.$message.success(res.meta.msg)
         this.addUserDialogVisible = false
-        this.getUserList()
+        this.getUsersList()
       })
     },
 
@@ -384,7 +403,7 @@ export default {
     // 编辑用户预校验与提交
     submitEditUserInfo () {
       this.$refs.editUserInfoFormRef.validate(async (valid) => {
-        if (!valid) return this.$message.error('规则校验失败')
+        if (!valid) return this.$message.warning('规则校验失败')
         // 发起网络请求
         const { data: res } = await this.$http.put(
           `users/${this.editUserInfoForm.id}`,
@@ -400,7 +419,7 @@ export default {
         }
         this.$message.success(res.meta.msg)
         this.editUserInfoDialogVisible = false
-        this.getUserList()
+        this.getUsersList()
       })
     },
     // 删除用户按钮
@@ -422,7 +441,7 @@ export default {
       const { data: res } = await this.$http.delete('users/' + id)
       if (res.meta.status !== 200) return this.$message.error(res.meta.msg)
       this.$message.success(res.meta.msg)
-      this.getUserList()
+      this.getUsersList()
     },
 
     // 点击分配角色
@@ -450,7 +469,7 @@ export default {
       if (res.meta.status !== 200) return this.$message.error(res.meta.msg)
 
       this.$message.success(res.meta.msg)
-      this.getUserList()
+      this.getUsersList()
       this.setRoleDialogVisible = false
     },
     // 关闭分配角色对话框

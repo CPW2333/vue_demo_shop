@@ -35,6 +35,11 @@ body,
     height: 250px !important;
 }
 
+/* 分页树的 */
+.treeTable {
+    margin-top: 15px;
+}
+
 /* 步骤条的 */
 .el-steps {
     margin: 15px;
@@ -49,4 +54,10 @@ body,
 /* 富文本编辑的 */
 .ql-editor {
     min-height: 300px !important;
+}
+
+/* 数据报表的 */
+canvas {
+    margin: 0 auto;
+    width: 100%;
 }

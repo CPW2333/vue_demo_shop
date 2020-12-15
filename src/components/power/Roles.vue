@@ -72,7 +72,7 @@
         <!-- 索引列 -->
         <el-table-column type="index"></el-table-column>
         <!-- 标题列 -->
-        <el-table-column label="角色名称" prop="roleName"></el-table-column>
+        <el-table-column label="角色名称" width="150px" prop="roleName"></el-table-column>
         <el-table-column label="角色描述" prop="roleDesc"></el-table-column>
         <el-table-column label="操作" width="300px">
           <template slot-scope="scope">
@@ -268,7 +268,7 @@ export default {
     submitAddRole () {
       // 表单预校验与提交信息
       this.$refs.addRoleFormRef.validate(async (valid) => {
-        if (!valid) return this.$message.error('规则校验失败')
+        if (!valid) return this.$message.warning('规则校验失败')
         // 发起网络请求
         const { data: res } = await this.$http.post('roles', this.addRoleForm)
         // console.log(res)
@@ -324,7 +324,7 @@ export default {
     // 提交编辑角色信息
     submitEditRoleInfo () {
       this.$refs.editRoleInfoFormRef.validate(async (valid) => {
-        if (!valid) return this.$message.error('规则校验失败')
+        if (!valid) return this.$message.warning('规则校验失败')
         // 发起网络请求
         const { data: res } = await this.$http.put(
           `roles/${this.editRoleInfoForm.roleId}`,

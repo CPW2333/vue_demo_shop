@@ -371,7 +371,7 @@ export default {
     // 提交添加参数或属性
     submitAddParamOrAttr () {
       this.$refs.addParamOrAttrFormRef.validate(async (valid) => {
-        if (!valid) return this.$message.error('规则校验失败')
+        if (!valid) return this.$message.warning('规则校验失败')
         const { data: res } = await this.$http.post(
           `categories/${this.cateId}/attributes`,
           {
@@ -408,7 +408,7 @@ export default {
     // 监听修改属性的提交
     submitEditParamOrAttr () {
       this.$refs.editParamOrAttrFormRef.validate(async (valid) => {
-        if (!valid) return this.$message.error('规则校验失败')
+        if (!valid) return this.$message.warning('规则校验失败')
         const { data: res } = await this.$http.put(
           `categories/${this.cateId}/attributes/${this.editParamOrAttrForm.attr_id}`,
           {

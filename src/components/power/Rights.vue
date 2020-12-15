@@ -8,6 +8,13 @@
     </el-breadcrumb>
     <!-- 所有分类表格 -->
     <el-card>
+      <el-alert
+        title="以下为列出的是本系统目前的所有权限，暂不可修改！"
+        show-icon
+        type="warning"
+        :closable="false"
+      >
+      </el-alert>
       <tree-table
         class="treeTable"
         :data="modifiedRightsTree"

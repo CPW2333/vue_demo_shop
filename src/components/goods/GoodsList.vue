@@ -35,7 +35,7 @@
         <el-table-column
           label="商品名称"
           prop="goods_name"
-          width="300px"
+          min-width="300px"
         ></el-table-column>
         <el-table-column
           label="商品价格(￥)"
@@ -47,12 +47,12 @@
           width="100px"
           prop="goods_number"
         ></el-table-column>
-        <el-table-column label="创建时间" prop="add_time">
+        <el-table-column label="商品入库时间" prop="add_time">
           <template slot-scope="scope">
             {{ scope.row.add_time | dateFormat }}
           </template>
         </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column label="操作" width="175px">
           <template slot-scope="scope">
             <!-- 修改按钮 -->
             <el-button
@@ -172,15 +172,34 @@ export default {
   methods: {
     // 获取商品列表数据
     async getGoodsList () {
+      // 去除输入框空格
+      this.queryInfo.query = this.queryInfo.query.trim()
       const { data: res } = await this.$http.get('goods', {
         params: this.queryInfo
       })
       if (res.meta.status !== 200) {
         return this.$message.error(res.meta.msg)
       }
+      // console.log(res)
+      // 查询结果优化
+      if (res.data.goods.length === 0 && res.data.total !== 0) {
+        // console.log(this.queryInfo.query.length)
+        // 判断输入框是否有值
+        if (this.queryInfo.query.length !== 0) {
+          // 输入框有值 是条件查询 改页码再来一次请求
+          this.queryInfo.pagenum = 1
+          this.getGoodsList()
+        } else {
+          // 输入框没有值 是删除操作
+          this.queryInfo.pagenum = res.data.pagenum - 1
+          // 页码不能为0
+          if (this.queryInfo.pagenum === 0) this.queryInfo.pagenum = 1
+          // 再请求一次
+          this.getGoodsList()
+        }
+      }
       this.goodsList = res.data.goods
       this.total = res.data.total
-      //   console.log(res)
     },
     // 监听pagesize改变的
     handleSizeChange (newSize) {
@@ -200,28 +219,6 @@ export default {
       this.getGoodsList()
     },
 
-    // 监听添加商品对话框关闭
-    addGoodsDialogClose () {
-      //   console.log('关闭了添加商品对话框')
-      //   this.$refs.addGoodsFormRef.resetFields()
-    },
-    // 添加商品前的表单预校验与提交
-    submitAddGoods () {
-      //   console.log('点击了添加商品')
-      //   // 重置表单 表单引用FormRef 用来操作表单 预校验
-      //   this.$refs.addGoodsFormRef.validate(async (valid) => {
-      //     if (!valid) return this.$message.error('规则校验失败')
-      //     // 发起网络请求
-      //     /* const { data: res } = await this.$http.post('users', this.addGoodForm)
-      //     // console.log(res)
-      //     if (res.meta.status !== 201) {
-      //       return this.$message.error(res.meta.msg)
-      //     }
-      //     this.$message.success(res.meta.msg)
-      //     this.addGoodsPage = false
-      //     this.getGoodsList() */
-      //   })
-    },
     // 监听打开添加商品页面
     addGoodsPage () {
       // 添加路由导航页面
@@ -244,7 +241,7 @@ export default {
     submitEditGoodsInfo () {
       console.log('点击了商品提交按钮')
       this.$refs.editGoodsInfoFormRef.validate((valid) => {
-        if (!valid) return this.$message.error('规则校验失败')
+        if (!valid) return this.$message.warning('规则校验失败')
       })
     },
     // 监听编辑商品对话框是否关闭

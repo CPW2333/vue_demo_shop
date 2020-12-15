@@ -257,9 +257,18 @@ export default {
       if (res.meta.status !== 200) {
         return this.$message.error(res.meta.msg)
       }
+      // console.log(res)
+      // 判断是否是最后一页删除
+      if (res.data.result.length === 0 && res.data.total !== 0) {
+        // console.log('走了这个循环')
+        this.queryInfo.pagenum = res.data.pagenum
+        // 页码不能为-1 服务器结果比实际少1
+        // if (this.queryInfo.pagenum === 0) this.queryInfo.pagenum = 1
+        // 再请求一次
+        this.getCatesList()
+      }
       this.catesList = res.data.result
       this.total = res.data.total
-      // console.log(res);
     },
     // 监听每页大小变化
     handleSizeChange (newSize) {
@@ -318,7 +327,7 @@ export default {
     submitaddCate () {
       // 预校验
       this.$refs.addCateFormRef.validate(async (valid) => {
-        if (!valid) return this.$message.error('规则校验失败')
+        if (!valid) return this.$message.warning('规则校验失败')
         // 发送请求
         const { data: res } = await this.$http.post(
           'categories',
@@ -350,7 +359,7 @@ export default {
     // 监听提交编辑分类按钮
     submitEditCateInfo () {
       this.$refs.editCateInfoFormRef.validate(async (valid) => {
-        if (!valid) return this.$message.error('规则校验失败')
+        if (!valid) return this.$message.warning('规则校验失败')
         // 发起网络请求
         const { data: res } = await this.$http.put(
           `categories/${this.editCateInfoForm.cat_id}`,
@@ -395,10 +404,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.treeTable {
-  margin-top: 15px;
-}
-
 .el-cascader {
   width: 100%;
 }

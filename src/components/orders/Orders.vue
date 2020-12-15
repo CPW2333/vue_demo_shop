@@ -56,7 +56,7 @@
             {{ scope.row.create_time | dateFormat }}
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="180px">
+        <el-table-column label="操作" width="175px">
           <!-- slot-scope="scope" -->
           <template>
             <!-- 修改订单地址 只是模拟 -->
@@ -123,6 +123,7 @@
           <el-form-item label="省市区/县：" prop="address1">
             <el-cascader
               :options="cityData"
+              clearable
               :props="{ expandTrigger: 'hover' }"
               v-model="editAddressrForm.address1"
             ></el-cascader>
@@ -148,7 +149,7 @@
       <!-- 内容主体区域 -->
       <span>
         <el-alert
-          title="暂无数据！"
+          title="物流详细信息！"
           type="warning"
           center
           :closable="false"
@@ -167,9 +168,6 @@
       </span>
       <!-- 底部区域 -->
       <span slot="footer" class="dialog-footer">
-        <el-button @click="logisticsStatusDialogVisible = false"
-          >取 消</el-button
-        >
         <el-button type="primary" @click="logisticsStatusDialogVisible = false"
           >确 定</el-button
         >
@@ -298,6 +296,8 @@ export default {
   },
   methods: {
     async getOrdersList () {
+      // 去除输入框空格
+      this.queryInfo.query = this.queryInfo.query.trim()
       const { data: res } = await this.$http.get('orders', {
         params: this.queryInfo
       })
@@ -340,10 +340,18 @@ export default {
       this.$refs.editAddressrFormRef.resetFields()
     },
     // 提交编辑地址
-    submitEditAddress () {},
+    submitEditAddress () {
+      this.$refs.editAddressrFormRef.validate((valid) => {
+        if (!valid) return
+        // 模拟提交
+        this.editAddressDialogVisible = false
+        this.$message.success('修改成功')
+      })
+    },
 
     // 查看物流进度
     showLogisticsStatusBox () {
+      // 接口未定义
       /* const { data: res } = await this.$http.post(
         'http://api.kdniao.cc/Ebusiness/EbusinessOrderHandle.aspx',
         {
@@ -368,5 +376,9 @@ export default {
 
 .el-cascader {
   width: 100%;
+}
+.el-timeline {
+  margin-top: 15px;
+  font-size: 12px;
 }
 </style>

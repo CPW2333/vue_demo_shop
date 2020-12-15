@@ -1,7 +1,7 @@
 ### 登录/退出功能 
 
 ##### 登录功能
-创建并切换到登录分支`git checkout -b login `
+创建并切换到开发分支`git checkout -b dev `
 
 ###### 删除不必要的代码
     App.vue:
@@ -486,4 +486,21 @@ User.js:
         <style lang="less" scoped>
         @import '../../plugins/timeline/timeline.css';
         @import '../../plugins/timeline-item/timeline-item.css';
+```
+
+### 数据统计模块开发
+
+##### 数据报表页面
+```js
+安装运行依赖：`echarts @4.1.0` 看教程操作
+    npm install echarts@4.1.0 --save
+Reports.vue:
+    行为区第一行导入 ：
+        import echarts from 'echarts'
+        import _ from 'lodash'
+    dom初始化完毕:
+    mounted() {
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'))
+    },
 ```
