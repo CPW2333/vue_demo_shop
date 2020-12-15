@@ -1,4 +1,8 @@
 module.exports = {
+  devServer: {
+    host: '0.0.0.0',
+    port: 12317,
+  },
   lintOnSave: false,
   chainWebpack: config => {
     // 发布模式
