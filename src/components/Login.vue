@@ -4,7 +4,7 @@
     <div class="login_box">
       <!-- 头像盒子 -->
       <div class="avater_box">
-        <img src="../assets/logo.png" alt="" />
+        <img src="../assets/user.png" alt="" />
       </div>
       <!-- 登录表单区域 -->
       <el-form
@@ -29,6 +29,8 @@
             type="password"
           ></el-input>
         </el-form-item>
+        <!-- 测试账号密码区域 -->
+        <div class="el-upload__tip">测试账号:testuser,密码:123456</div>
         <!-- 按钮区域 -->
         <el-form-item class="btns">
           <el-button @click="login" type="primary">登录</el-button>
@@ -45,28 +47,28 @@ export default {
     return {
       // 登录表单的数据绑定对象
       loginForm: {
-        username: 'admin',
-        password: '123456'
+        username: '',
+        password: ''
       },
       // 表单验证规则对象
       loginFormRules: {
         username: [
-          { required: true, message: '请输入用户名！', trigger: 'blur' },
-          {
+          { required: true, message: '请输入用户名！', trigger: 'blur' }
+          /* {
             min: 2,
             max: 10,
             message: '长度在 2 到 10 个字符',
-            trigger: 'blur'
-          }
+            trigger: 'blur',
+          }, */
         ],
         password: [
-          { required: true, message: '请输入密码！', trigger: 'blur' },
-          {
+          { required: true, message: '请输入密码！', trigger: 'blur' }
+          /* {
             min: 6,
             max: 15,
             message: '长度在 6 到 15 个字符',
-            trigger: 'blur'
-          }
+            trigger: 'blur',
+          }, */
         ]
       }
     }

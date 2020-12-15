@@ -1,7 +1,7 @@
 ### 登录/退出功能 
 
 ##### 登录功能
-创建并切换到登录分支`git checkout -b login `
+创建并切换到开发分支`git checkout -b dev `
 
 ###### 删除不必要的代码
     App.vue:
@@ -429,8 +429,78 @@ User.js:
 
 ```
 
-##### 商品分类页面
+##### 分类参数页面
 ```js
+数据绑定实现多个按钮共用一个对话框
 
+```
 
+##### 商品列表页面
+```js
+创建全局时间过滤器
+    main.js:
+        Vue.filter('dataFormat', function (originVal) {
+            const date = new Date(originVal)
+            const y = date.getFullYear()
+            const m = (date.getMonth() + 1 + '').padStart(2, '0')
+            const d = (date.getDay() + '').padStart(2, '0')
+
+            const hh = (date.getHours() + '').padStart(2, '0')
+            const mm = (date.getMinutes() + '').padStart(2, '0')
+            const ss = (date.getSeconds() + '').padStart(2, '0')
+
+            return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
+
+        })
+跳转到添加商品页面：
+    // 添加路由导航页面
+    this.$router.push('/goods/add')
+    goods文件夹添加组件：
+        AddGoods.vue
+    第一个children添加子路由规则：
+        { path: '/goods/add', component: AddGoods },
+    简单字符串到数字转换：
+        activeIndex - 0
+    Upload组件自己封装了一个请求Ajax，需要改掉：
+    商品内容需要富文本编辑器：
+        安装运行依赖 `vue-quill-editor @3.0.6`
+    安装运行依赖 lodash @4.17.111:
+        做深拷贝 `cloneDeep(obj)`
+        script中 第一行导入
+跳转到编辑商品页面：
+```
+
+### 订单管理模块开发
+
+##### 订单列表页面
+```js
+导入省市区数据：
+    script区域 导入数据
+    import cityData from './citydata.js'
+使用时间轴组件：
+    插件版本旧  不能直接使用 需要外部导入src
+    element.js:
+        import Timeline from '../plugins/timeline/index'
+        import TimelineItem from '../plugins/timeline-item/index'
+    Orders.vue:
+        <style lang="less" scoped>
+        @import '../../plugins/timeline/timeline.css';
+        @import '../../plugins/timeline-item/timeline-item.css';
+```
+
+### 数据统计模块开发
+
+##### 数据报表页面
+```js
+安装运行依赖：`echarts @4.1.0` 看教程操作
+    npm install echarts@4.1.0 --save
+Reports.vue:
+    行为区第一行导入 ：
+        import echarts from 'echarts'
+        import _ from 'lodash'
+    dom初始化完毕:
+    mounted() {
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'))
+    },
 ```

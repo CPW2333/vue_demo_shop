@@ -4,7 +4,7 @@
     <el-header>
       <div>
         <img src="../assets/store.png" alt="" />
-        <span>电商后台管理系统</span>
+        <span>HHSM-电商后台管理系统</span>
       </div>
       <el-button type="info" @click="logout">退出</el-button>
     </el-header>

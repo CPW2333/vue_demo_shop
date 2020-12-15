@@ -8,6 +8,13 @@
     </el-breadcrumb>
     <!-- 所有分类表格 -->
     <el-card>
+      <el-alert
+        title="以下为列出的是本系统目前的所有权限，暂不可修改！"
+        show-icon
+        type="warning"
+        :closable="false"
+      >
+      </el-alert>
       <tree-table
         class="treeTable"
         :data="modifiedRightsTree"
@@ -75,7 +82,7 @@ export default {
       // 请求参数设置为Tree
       const { data: res } = await this.$http.get('rights/tree')
       if (res.meta.status !== 200) {
-        return this.$message.error('权限列表数据获取失败')
+        return this.$message.error(res.meta.msg)
       }
       this.rightsTree = res.data
       this.modifyRightsTree()
