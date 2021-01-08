@@ -4,7 +4,7 @@ module.exports = {
     port: 8888,
   },  */
   lintOnSave: false,
-  chainWebpack: config  => {
+  chainWebpack: config => {
     // 发布模式
     config.when(process.env.NODE_ENV === 'production', config => {
       // entry找到默认的打包入口，调用clear则是删除默认的打包入口
