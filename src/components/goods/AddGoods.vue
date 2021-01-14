@@ -211,7 +211,7 @@ export default {
       // 图片预览对话框
       uploadImgDialogVisible: false,
       // 图片上传的路径
-      UploadImgUrl: 'http://127.0.0.1:8888/api/private/v1/upload',
+      UploadImgUrl: 'https://wjforwk.xyz:8888/api/private/v1/upload',
       // 图片上传需要的token
       UpImgResHeaderOjb: {
         Authorization: window.sessionStorage.getItem('token')
